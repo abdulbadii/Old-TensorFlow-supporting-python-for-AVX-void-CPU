@@ -15,23 +15,27 @@ It will need, as dependency, a certain openSSL version
    https://www.python.org/ftp/python/3.6.15/Python-3.6.15.tar.xz   
    Then extract it as a directory   
 3. make sure the owner is the user and has 755 permission, entirely   
-4. Fix, edit Modules/mathmodule.c at the beginning of function `sinpi(double x)` line 69 or so, insert it with preprocessor code line:   
+4. Fix, edit `Modules/mathmodule.c` at the beginning of function `sinpi(double x)` line 69 or so, insert it with preprocessor code line:   
 
    **#if !defined(__GLIBC__) || __GLIBC__ < 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ < 38)**   
     
    So from:
-```    69	static double   
+```
+    69	static double   
     70	sinpi( double x) {   
-    ...   
+    ...
+    ...
     103 }   
 ```
    
-    become:   
+become:   
 
-```    69	#if !defined(__GLIBC__) || __GLIBC__ < 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ < 38)   
+```
+    69	#if !defined(__GLIBC__) || __GLIBC__ < 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ < 38)   
     70	static double   
     71	sinpi( double x)   
     72	{   
+    ...
     ...   
     103	}   
     104	#endif   
@@ -95,8 +99,8 @@ It will need, as dependency, a certain openSSL version
 20. Upon success satisfying every rerquirement; one of the most popular AI tool,
     The tandem of Python and TensorFlow should have been afforded      
 
-for example it'll do on:
-
+for example, it will do:
+https://github.com/abdulbadii/chessboard-reader-by-old-TensorFlow-and-Python
 
 
 
