@@ -14,12 +14,11 @@ It requires, as a dependency, certain openSSL version
    https://github.com/openssl/openssl/releases/download/OpenSSL_1_1_0l/openssl-1.1.0l.tar.gz  
    Extract it as a directory and make sure the owner is the user with 755 permission, entirely   
 
-2. Create another directory at the same place of the source extracted (being sibling each other), almost with the same name only slighty renamed, e.g. suffixed with few letters   
-   It will be for the build result, so   
+2. To prepare the build result, create another directory at the same place of the source extracted (being sibling each other), almost with the same name only slighty renamed, e.g. suffixed with few letters   
    `...........1.1.0l`   
    become   
    `...........1.1.0.bin`  
-   Within, prepare these 2 directories:   
+   Within it prepare these 2 directories:   
    `$ mkdir -p openssl-1.1.0.bin/{include,lib}`   
 
 4. Enter to the source directory and build   
@@ -105,12 +104,12 @@ It requires, as a dependency, certain openSSL version
     $ pip install six==1.10.0   
     $ pip install numpy==1.14.5   
 ```
-13. Obtain TensorFlow 1.5   
+13. Get the TensorFlow 1.5 itself  
     `pip install tensorflow==1.5`  
     Verify   
     `pip show tensorflow`  
 
 Satisfying every preceding requirement should succeed producing Python and TensorFlow that is runnning smoothly on any CPU incapable of AVX instruction   
 
-For example it will do:   
+For example, it will do   
 https://github.com/abdulbadii/chessboard-reader-by-old-TensorFlow-and-Python   
