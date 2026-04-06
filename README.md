@@ -88,14 +88,14 @@ It requires, as a dependency, certain openSSL version
     `$ python3.6 --version`    
     `$ python3.6 -c 'import ssl; print(ssl.OPENSSL_VERSION)'`   
 
-10. Next is to have a python 3.6 environment, say, it's `TensorFlow1.5`, in home directory   
+10. Next is to have a Python 3.6 environment, say, it's `TensorFlow1.5` in home directory:   
     `$ python3.6 -m venv ~/TensorFlow1.5`   
 
 11. Enter it and Install `pip`   
     `. ~/TensorFlow1.5/activate`   
     `curl https://bootstrap.pypa.io/pip/3.6/get-pip.py  | python`   
 
-12. Ensure TensorFlow dependencies
+12. Ensure TensorFlow dependencies availability   
 ```
     $ pip install wheel==0.3.0
     $ pip install absl-py==0.11.0   
@@ -108,7 +108,7 @@ It requires, as a dependency, certain openSSL version
     Verify   
     `pip show tensorflow`  
 
-Upon satisfying every preceding requirement, it will succeed producing Python and TensorFlow each working synergic with the other and be easily maintained   
+Upon satisfying every preceding requirement, it will succeed producing Python and TensorFlow each of which works synergic with the other and is easily maintained   
 
 For example it will do:   
 https://github.com/abdulbadii/chessboard-reader-by-old-TensorFlow-and-Python   
