@@ -110,7 +110,7 @@ It requires, as a dependency, certain openSSL version
     Verify   
     `pip show tensorflow`  
 
-Upon satisfying every preceding requirement, it will succeed producing Python and TensorFlow each of which works synergic with the other and is easily maintained   
+Satisfying every preceding requirement should succeed producing Python and TensorFlow that is runnning smoothly on any CPU incapable of AVX instruction   
 
 For example it will do:   
 https://github.com/abdulbadii/chessboard-reader-by-old-TensorFlow-and-Python   
