@@ -44,8 +44,8 @@ become:
 6. Get openSSl 1.1.0   
    https://github.com/openssl/openssl/releases/download/OpenSSL_1_1_0l/openssl-1.1.0l.tar.gz  
    Extract it as a directory and make sure the owner is the user and has 755 permission, entirely   
-7. Create another directory of the same name but slighty renamed and/or suffixed with few letters at the same place of the source extracted,  
-   which is meant for its build result, so   
+7. Create another directory at the same place of the source extracted, almost with the same name only slighty renamed, e.g. suffixed with few letters   
+   This will be its build result, so   
    `...........1.1.0l`   
    become   
    `...........1.1.0.bin`   
@@ -61,7 +61,7 @@ become:
     $ cp -r include/openssl ../openssl-1.1.0.bin/include   
     $ cp libcrypto.a libssl.a ../openssl-1.1.0.bin/lib
 ```
-13. Enter to the Python 3.6.15 source directory to try building by a CL which will compile it against the newly made openSSL static library and install it in `/usr/bin`
+13. Enter to the Python 3.6.15 source directory to try building by a CL that compiles against the newly made openSSL static library and install it in `/usr/bin`  
     It's set to skip some needless PGO build tests   
 ```    
     ./configure --without-ensurepip --prefix=/usr CFLAGS='-march=native -O3' CPPFLAGS=-I/home/abdu/Downloads/openssl-1.1.0.bin/include LDFLAGS='-L/home/abdu/Downloads/openssl-1.1.0.bin/lib' LIBS='-lssl -lcrypto -ldl -lpthread -lz' && make PROFILE_TASK='-m test.regrtest --pgo -x test_asyncio -x test_buffer -x test_concurrent_futures -x test_lib2to3 -x test_logging -x test_pickle -x test_readline -x test_weakref' profile-opt -j && sudo make install
@@ -88,7 +88,7 @@ become:
     `$ python3.6 --version`    
     `$ python3.6 -c 'import ssl; print(ssl.OPENSSL_VERSION)'`   
 
-16. Have a python 3.6 environment, eg. namedly `TensorFlow1.5` in, say, home directory   
+16. Have a python 3.6 environment, e.g. `TensorFlow1.5` in, say, home directory   
     `$ python3.6 -m venv ~/TensorFlow1.5`   
 
 17. Enter it and Install `pip`   
@@ -106,9 +106,9 @@ become:
 19. Obtain TensorFlow 1.5   
     `pip install tensorflow==1.5`   
 
-20. Upon success satisfying every preceding requirement, now one of the most popular AI tool, the Python and TensorFlow tandem may be afforded      
+Upon success in satisfying every preceding requirement, the Python and TensorFlow tandem, one of the most versatile AI tools, should be readily affordable   
 
-For example, it will do:   
+For example it will do:   
 https://github.com/abdulbadii/chessboard-reader-by-old-TensorFlow-and-Python
 
 
