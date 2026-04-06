@@ -16,11 +16,11 @@ It requires, as a dependency, certain openSSL version
    It will be for the build result, so   
    `...........1.1.0l`   
    become   
-   `...........1.1.0.bin`
-   Prepare these 2 directories within: 
+   `...........1.1.0.bin`  
+   Within, prepare these 2 directories:   
    `$ mkdir -p openssl-1.1.0.bin/{include,lib}`   
 
-4. Enter to the source directory and build:   
+4. Enter to the source directory and build   
 ```
    $ cd openssl-1.1.0l   
    $ ./config no-shared -march=native && make -j
