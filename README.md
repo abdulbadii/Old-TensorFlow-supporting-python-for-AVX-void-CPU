@@ -5,8 +5,7 @@ As all TensorFlow version 1.6 up to the latest now require costly H/W, very pric
 Now the point of problem is, it can only be utilized by using Python version 3.6 or so only, which is now rather difficult to build due to incompatiblility or version discrepancies between old and new S/W package leading toa  build inaccuracy/incorrectness, and due to it's EOL (end-of-life) now as stated on its official page:   
 ##### Warning: Python 3.6.0 reached end-of-life on 2021-12-23. It is no longer supported and does not receive security updates. We recommend upgrading to the latest Python release   
 
-So here and now, this is to fix and revive the python 3.6 project and have the python correctly built and will easily be made use for old TensorFlow, version 1.5   
-
+So here and now, this is to fix and revive the Python 3.6 project to have this Python correctly built and be made use for old TensorFlow version 1.5   
 It requires, as a dependency, certain openSSL version   
 
 1. Get openSSl 1.1.0   
