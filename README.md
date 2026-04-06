@@ -2,7 +2,9 @@
 TensorFlow uses on AVX instruction-void CPU may be as good as that on more modern CPU   
 
 As all TensorFlow version 1.6 up to the latest now require costly H/W, very pricy CPU capable of performing AVX instruction, TensorFlow version 1.5 stays working on any CPU incapable of AVX instruction   
-Now the point of problem is, it can only be utilized by using Python version 3.6 or so only, which is now rather difficult to build due to incompatiblility or version discrepancies between old and new S/W package leading toa  build inaccuracy/incorrectness, and due to it's EOL (end-of-life) now as stated on its official page:   
+
+Now the point of problem is; this TensorFlow can only be utilized by using Python version 3.6 or older only, which is now difficult to build due to incompatibilility or incorrectness interfacing between it and current OS mainstream packages, leading to build failures.   
+This because of its due EOL (end-of-life) as stated on its official page:   
 ##### Warning: Python 3.6.0 reached end-of-life on 2021-12-23. It is no longer supported and does not receive security updates. We recommend upgrading to the latest Python release   
 
 So here and now, this is to fix and revive the Python 3.6 project to have this Python correctly built and be made use for old TensorFlow version 1.5   
