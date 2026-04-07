@@ -20,15 +20,15 @@ It requires, as a dependency, certain openSSL version
    - `Python-3.6.15` source   
 4. Enter into openssl-1.1.0l source directory and build   
    ```
-   cd openssl-1.1.0l && ./config  -march=native --prefix=$PWD.bin && make -j3 && make install   
+   cd openssl-1.1.0l && ./config -march=native --prefix=$PWD.bin && make -j && make install   
    ```
-   Notice `$PWD.bin`. This suffixes it as `openssl-1.1.0lbin` and during `make install` operation automatically being created   
+   Notice `$PWD.bin`. This suffixes it as `openssl-1.1.0l.bin` which is then automatically created during `make install` execution   
 
-5. Now Python 3.6.15, download its project source, go to the python download page   
+5. Now download Python 3.6.15 project source from its download page   
    https://www.python.org/ftp/python/3.6.15   
    Find and click the download link, or click:   
    https://www.python.org/ftp/python/3.6.15/Python-3.6.15.tar.xz   
-   Extract it as directory in the path just clarified above, ensure the owner is the user with 755 permission entirely   
+   Extract it as directory in the path just explained above, ensure the owner is the user with 755 permission entirely   
 
 6. Enter into it   
    Edit file `Modules/mathmodule.c`, at the beginning of function `sinpi(double x)` at line 69 or so, insert this preprocessor code line and its closing one:   
@@ -40,7 +40,8 @@ It requires, as a dependency, certain openSSL version
    So this:
    ```
    69	static double   
-   70	sinpi( double x) {   
+   70	sinpi( double x)\
+   {   
    ...
    ...
    103 }   
@@ -52,24 +53,24 @@ It requires, as a dependency, certain openSSL version
    71	sinpi( double x)   
    72	{   
    ...
-   ...   
    103 }   
    104 #endif   
    ```
-7. Then try to build by a CL that compiles against the newly made openSSL static library and install it in `/usr/bin`  
-    It's set to skip some needless PGO build tests   
-   ```    
-    ./configure --without-ensurepip --prefix=/usr CFLAGS='-march=native -O3' CPPFLAGS=-I../openssl-1.1.0l.bin/include LDFLAGS='-L../openssl-1.1.0l.bin/lib' LIBS='-lssl -lcrypto -ldl -lpthread -lz' && make PROFILE_TASK='-m test.regrtest --pgo -x test_asyncio -x test_buffer -x test_concurrent_futures -x test_lib2to3 -x test_logging -x test_pickle -x test_readline -x test_weakref' profile-opt -j3 && sudo make install   
+7. Then try to build using a CL that will compile it against the newly cremated openSSL static library and install it in `/usr/bin`  
+   It's set to skip some needless PGO-build modules tests   
+   ```   
+    ./configure --without-ensurepip --prefix=/usr CFLAGS='-march=native -O3' CPPFLAGS=-I../openssl-1.1.0l.bin/include LDFLAGS='-L../openssl-1.1.0l.bin/lib' LIBS='-lssl -lcrypto -ldl -lpthread -lz' && make PROFILE_TASK='-m test.regrtest --pgo -x test_asyncio -x test_buffer -x test_concurrent_futures -x test_lib2to3 -x test_logging -x test_pickle -x test_readline -x test_weakref' profile-opt -j && strip python && sudo make install   
    ```
 
 8. **Please note. IMPORTANT**:   
-   As `make` install location is set by `--prefix=/usr` that points actually to `/usr/bin`, this wil replace main/system-wide `python` link
-   to link to this python 3.6.15
-   So as most installations are linking to the newer one, it must be linked back to it:   
+   Since `make` install location is set by `--prefix=/usr` just shown above, this'd put python binary in `/usr/bin`, simply replacing `python` link
+   to point to this python 3.6.15 binary namedly python3.6   
+   So since most system tools installations using main/system-wide, newest python, invoking it through this link, it must be linked back to it:   
    ```
    sudo ln -sf /usr/bin/{python3.14, python}`
    sudo ln -sf /usr/bin/python{3.14,}-config
-   ```   
+   ```
+   Correct it to your version accordingly if needed   
    We can simply inspect python 3.6.15 related files   
    ```
    ls -l /usr/bin/pyt*
