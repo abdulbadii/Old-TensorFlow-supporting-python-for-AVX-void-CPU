@@ -22,13 +22,13 @@ It requires, as a dependency, certain openSSL version
    ```
    cd openssl-1.1.0l && ./config  -march=native --prefix=$PWD.bin && make -j3 && make install   
    ```
-   Notice `$PWD.bin`, this suffixes it to become `openssl-1.1.0lbin`, and `make install` operation will automatically create it   
+   Notice `$PWD.bin`. This suffixes it as `openssl-1.1.0lbin` and during `make install` operation automatically being created   
 
 5. Now Python 3.6.15, download its project source, go to the python download page   
    https://www.python.org/ftp/python/3.6.15   
    Find and click the download link, or click:   
    https://www.python.org/ftp/python/3.6.15/Python-3.6.15.tar.xz   
-   In the path just clarified above, extract it as directory. Ensure the owner is the user with 755 permission entirely   
+   Extract it as directory in the path just clarified above, ensure the owner is the user with 755 permission entirely   
 
 6. Enter into it   
    Edit file `Modules/mathmodule.c`, at the beginning of function `sinpi(double x)` at line 69 or so, insert this preprocessor code line and its closing one:   
