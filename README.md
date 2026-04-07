@@ -12,31 +12,26 @@ It requires, as a dependency, certain openSSL version
 
 1. Get openSSl 1.1.0   
    https://github.com/openssl/openssl/releases/download/OpenSSL_1_1_0l/openssl-1.1.0l.tar.gz  
-   Extract it as a directory and make sure the owner is the user with 755 permission, entirely   
+2. Prepare a location, write down or remember well its path, later this'd be the same path where the Python tar must be extracted to   
+   Extract openssl tar in this path as a directory, make sure its owner is the user with 755 permission entirely   
+3. So the path will have to gather 3 directories:   
+   - `openssl-1.1.0l` source   
+   - `openssl-1.1.0l.bin`    (a renamed/suffixed of previous one, automatically created as shown below)   
+   - `Python-3.6.15` source   
+4. Enter into openssl-1.1.0l source directory and build   
+   ```
+   cd openssl-1.1.0l && ./config  -march=native --prefix=$PWD.bin && make -j3 && make install   
+   ```
+   Notice `$PWD.bin`, this suffixes it to become `openssl-1.1.0lbin`, and `make install` operation will automatically create it   
 
-2. To prepare the build result, create another directory at the same place of the source extracted (being sibling each other), almost with the same name only slighty renamed, e.g. suffixed with few letters   
-   `...........1.1.0l`   
-   become   
-   `...........1.1.0.bin`  
-   Within it prepare these 2 directories:   
-   ```
-   mkdir -p openssl-1.1.0.bin/{include,lib}
-   ```
-4. Enter to the source directory and build   
-   ```
-   cd openssl-1.1.0l && ./config no-shared -march=native && make -j
-   ```
-6. Copy the process result to the prepared directory
-   ```
-   cp -r include/openssl ../openssl-1.1.0.bin/include   
-   cp libcrypto.a libssl.a ../openssl-1.1.0.bin/lib
-   ```
-5. Now Python 3.6.15; download its project source, go to the python download page   
+5. Now Python 3.6.15, download its project source, go to the python download page   
    https://www.python.org/ftp/python/3.6.15   
    Find and click the download link, or click:   
    https://www.python.org/ftp/python/3.6.15/Python-3.6.15.tar.xz   
-   Then extract it as a directory. Make sure the owner is the user with 755 permission, entirely   
-6. Edit `Modules/mathmodule.c` at the beginning of function `sinpi(double x)` at line 69 or so, insert it with preprocessor code line and its closing one:   
+   In the path just clarified above, extract it as directory. Ensure the owner is the user with 755 permission entirely   
+
+6. Enter into it   
+   Edit file `Modules/mathmodule.c`, at the beginning of function `sinpi(double x)` at line 69 or so, insert this preprocessor code line and its closing one:   
    ```
    #if !defined(__GLIBC__) || __GLIBC__ < 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ < 38)
    
@@ -61,13 +56,13 @@ It requires, as a dependency, certain openSSL version
    103 }   
    104 #endif   
    ```
-7. Enter to the Python 3.6.15 source directory to try building by a CL that compiles against the newly made openSSL static library and install it in `/usr/bin`  
+7. Then try to build by a CL that compiles against the newly made openSSL static library and install it in `/usr/bin`  
     It's set to skip some needless PGO build tests   
    ```    
-    ./configure --without-ensurepip --prefix=/usr CFLAGS='-march=native -O3' CPPFLAGS=-I/home/abdu/Downloads/openssl-1.1.0.bin/include LDFLAGS='-L/home/abdu/Downloads/openssl-1.1.0.bin/lib' LIBS='-lssl -lcrypto -ldl -lpthread -lz' && make PROFILE_TASK='-m test.regrtest --pgo -x test_asyncio -x test_buffer -x test_concurrent_futures -x test_lib2to3 -x test_logging -x test_pickle -x test_readline -x test_weakref' profile-opt -j && sudo make install
+    ./configure --without-ensurepip --prefix=/usr CFLAGS='-march=native -O3' CPPFLAGS=-I../openssl-1.1.0l.bin/include LDFLAGS='-L../openssl-1.1.0l.bin/lib' LIBS='-lssl -lcrypto -ldl -lpthread -lz' && make PROFILE_TASK='-m test.regrtest --pgo -x test_asyncio -x test_buffer -x test_concurrent_futures -x test_lib2to3 -x test_logging -x test_pickle -x test_readline -x test_weakref' profile-opt -j3 && sudo make install   
    ```
 
-8. **Please note**:   
+8. **Please note. IMPORTANT**:   
    As `make` install location is set by `--prefix=/usr` that points actually to `/usr/bin`, this wil replace main/system-wide `python` link
    to link to this python 3.6.15
    So as most installations are linking to the newer one, it must be linked back to it:   
