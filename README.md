@@ -56,10 +56,10 @@ It requires, as a dependency, certain openSSL version
    103 }   
    104 #endif   
    ```
-7. Then try to build using a CL that will compile it against the newly cremated openSSL static library and install it in `/usr/bin`  
+7. Then try to build using a CL that will compile it against the newly created openSSL static library and install it in `/usr/bin`  
    It's set to skip some needless PGO-build modules tests   
    ```   
-    ./configure --without-ensurepip --prefix=/usr CFLAGS='-march=native -O3' CPPFLAGS=-I../openssl-1.1.0l.bin/include LDFLAGS='-L../openssl-1.1.0l.bin/lib' LIBS='-lssl -lcrypto -ldl -lpthread -lz' && make PROFILE_TASK='-m test.regrtest --pgo -x test_asyncio -x test_buffer -x test_concurrent_futures -x test_lib2to3 -x test_logging -x test_pickle -x test_readline -x test_weakref' profile-opt -j && strip python && sudo make install   
+   ./configure --without-ensurepip --prefix=/usr CFLAGS='-march=native -O3' CPPFLAGS=-I../openssl-1.1.0l.bin/include LDFLAGS='-L../openssl-1.1.0l.bin/lib' LIBS='-lssl -lcrypto -ldl -lpthread -lz' && make PROFILE_TASK='-m test.regrtest --pgo -x test_asyncio -x test_buffer -x test_concurrent_futures -x test_compileall -x test_decimal -x test_io -x test_lib2to3 -x test_logging -x test_pickle -x test_readline -x test_signal -x test_socket -x test_weakref' profile-opt -j && strip python && sudo make install   
    ```
 
 8. **Please note. IMPORTANT**:   
@@ -93,7 +93,7 @@ It requires, as a dependency, certain openSSL version
     ```
     python3.6 -m venv ~/TensorFlow1.5
     ```   
-11. Enter it and Install `pip`   
+11. Enter it and Install `pip` of its version   
     ```
     . ~/TensorFlow1.5/activate`   
     curl -O https://bootstrap.pypa.io/pip/3.6/get-pip.py && python get-pip.py   
