@@ -96,9 +96,13 @@ It requires, as a dependency, certain openSSL version
 11. Enter it and Install `pip`   
     ```
     . ~/TensorFlow1.5/activate`   
-    curl -O https://bootstrap.pypa.io/pip/3.8/get-pip.py && python get-pip.py
+    curl -O https://bootstrap.pypa.io/pip/3.6/get-pip.py && python get-pip.py   
+    pip --version
     ```
-12. Ensure TensorFlow dependencies availability   
+    For user *foo* it'd print:   
+    `pip 21.3.1 from /home/foo/tensorFlow1.5/lib/python3.6/site-packages/pip (python 3.6)`   
+    
+13. Ensure TensorFlow dependencies availability   
     ```
     pip install wheel==0.3.0
     pip install absl-py==0.11.0   
@@ -106,7 +110,7 @@ It requires, as a dependency, certain openSSL version
     pip install six==1.10.0   
     pip install numpy==1.14.5   
     ```
-13. Get the TensorFlow itself and then verify  
+14. Get the TensorFlow itself and then verify  
  ```
    pip install tensorflow==1.5`  
    pip show tensorflow`  
