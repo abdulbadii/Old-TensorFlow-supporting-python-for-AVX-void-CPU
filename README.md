@@ -93,14 +93,14 @@ It requires, as a dependency, certain openSSL version
     ```
     python3.6 -m venv ~/TensorFlow1.5
     ```   
-11. Enter it and Install `pip` of its version   
+11. Enter it and Install `pip` of its version and verify   
     ```
     . ~/TensorFlow1.5/activate`   
     curl -O https://bootstrap.pypa.io/pip/3.6/get-pip.py && python get-pip.py   
-    pip --version
+    pip --version && rm get-pip.py
     ```
-    For user *foo* it'd print:   
-    `pip 21.3.1 from /home/foo/tensorFlow1.5/lib/python3.6/site-packages/pip (python 3.6)`   
+    Upon success if user is *foo* it'll print:   
+    `pip 21.3.1 from /home/foo/TensorFlow1.5/lib/python3.6/site-packages/pip (python 3.6)`   
     
 13. Ensure TensorFlow dependencies availability   
     ```
