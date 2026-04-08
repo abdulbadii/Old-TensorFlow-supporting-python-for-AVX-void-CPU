@@ -96,7 +96,7 @@ It requires, as a dependency, certain openSSL version
 11. Enter it and Install `pip`   
     ```
     . ~/TensorFlow1.5/activate`   
-    curl https://bootstrap.pypa.io/pip/3.6/get-pip.py  | python
+    curl -O https://bootstrap.pypa.io/pip/3.8/get-pip.py && python get-pip.py
     ```
 12. Ensure TensorFlow dependencies availability   
     ```
