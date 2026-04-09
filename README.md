@@ -114,7 +114,7 @@ It requires, as a dependency, certain openSSL version
    pip install tensorflow==1.5`  
    pip show tensorflow`  
 ```
-Satisfying every preceding requirement should succeed producing Python and TensorFlow that is runnning smoothly on any CPU incapable of AVX instruction   
+Satisfying every preceding requirement should succeed producing Python and TensorFlow that will run smoothly on a CPU void of AVX instruction   
 
-For example, it will do   
+For example it will do   
 https://github.com/abdulbadii/chessboard-reader-by-old-TensorFlow-and-Python   
