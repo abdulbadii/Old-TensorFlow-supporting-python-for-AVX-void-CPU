@@ -14,9 +14,9 @@ It requires, as a dependency, certain openSSL version
    https://github.com/openssl/openssl/releases/download/OpenSSL_1_1_0l/openssl-1.1.0l.tar.gz  
 2. Prepare a location, write down or remember well its path, later this'd be the same path where the Python tar must be extracted to   
    Extract openssl tar in this path as a directory, make sure its owner is the user with 755 permission entirely   
-3. So the path will have to gather 3 directories:   
+3. So the path would gather directory:   
    - `openssl-1.1.0l` source   
-   - `openssl-1.1.0l.bin`    (a renamed/suffixed of previous one, automatically created as shown below)   
+   - `openssl-1.1.0l.bin`    (a renamed/suffixed of previous one automatically created, shown below)   
    - `Python-3.6.15` source   
 4. Enter into openssl-1.1.0l source directory and build   
    ```
@@ -57,16 +57,16 @@ It requires, as a dependency, certain openSSL version
    104 #endif   
    ```
 8. Then build using CL that would compile it against the newly created openSSL static library and install it in `/usr/bin`  
-   It's set to skip some needless PGO-build module tests   
+   It's set to skip useless PGO-build module tests   
    ```   
-   ./configure --without-ensurepip --prefix=/usr CFLAGS='-march=native -O3' CPPFLAGS=-I../openssl-1.1.0l.bin/include LDFLAGS='-L../openssl-1.1.0l.bin/lib' LIBS='-lssl -lcrypto -ldl -lpthread -lz' && make PROFILE_TASK='-m test.regrtest --pgo -x test_asyncio -x test_buffer -x test_concurrent_futures -x test_compileall -x test_decimal -x test_io -x test_lib2to3 -x test_logging -x test_pickle -x test_readline -x test_signal -x test_socket -x test_weakref' profile-opt -j && strip python && sudo make install   
+   ./configure --without-ensurepip --prefix=/usr CFLAGS='-march=native -O3' CPPFLAGS=-I../openssl-1.1.0l.bin/include LDFLAGS='-L../openssl-1.1.0l.bin/lib' LIBS='-lssl -lcrypto -ldl -lpthread -lz' && make PROFILE_TASK='-m test.regrtest --pgo -x test_asyncio test_buffer test_concurrent_futures test_compileall test_decimal test_http* test_io test_lib2to3 test_log* test_pickle test_readline test_signal test_socket test_tarfile test_trace test_url* test_venv test_weakref' profile-opt -j && strip python && sudo make install   
    ```
 
 9. Verify one that is there  
    ```
    ./python --version`  && ./python -c 'import ssl; print(ssl.OPENSSL_VERSION)'
    ```
-   `Python 3.6.15`
+   `Python 3.6.15`   
    `OpenSSL 1.1.0l  10 Sep 2019`   
 
 10. **Please note. IMPORTANT!**:   
