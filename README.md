@@ -40,7 +40,7 @@ It requires, as a dependency, certain openSSL version
    So this:
    ```
    69	static double   
-   70	sinpi( double x)\
+   70	sinpi( double x)
    {   
    ...
    ...
@@ -56,8 +56,8 @@ It requires, as a dependency, certain openSSL version
    103 }   
    104 #endif   
    ```
-8. Build it using CL that would compile it against the newly created openSSL static library and has option to skip useless PGO-build module testsinstall
-   it will install it in `/usr/bin`   
+8. Build it using this command line that would compile it against the newly created openSSL static library, and should skip useless PGO-build module tests   
+   it will install in `/usr/bin`   
    ```   
    ./configure --without-ensurepip --prefix=/usr CFLAGS='-march=native -O3' CPPFLAGS=-I../openssl-1.1.0l.bin/include LDFLAGS='-L../openssl-1.1.0l.bin/lib' LIBS='-lssl -lcrypto -ldl -lpthread -lz' && make PROFILE_TASK='-m test.regrtest --pgo -x test_asyncio test_buffer test_concurrent_futures test_compileall test_decimal test_httplib test_io test_lib2to3 test_pickle test_readline test_signal test_socket test_tarfile test_trace test_venv test_weakref' profile-opt -j && strip python && sudo make install   
    ```   
@@ -80,7 +80,7 @@ It requires, as a dependency, certain openSSL version
     `-rwxr-xr-x 2 root root 3090792 Apr  5 12:23 /usr/bin/python3.6`   
     `lrwxrwxrwx 1 root root 17 Apr  5 09:30 /usr/bin/python3.6-config -> python3.6m-config`   
 
-    Since `make` install location set by `--prefix=/usr` shown in CL above will put python3.6.15 binary in `/usr/bin`, the installation may possibly replace system-wide `python` link with another pointing to it. Then, as most system tools using this main/system-wide python, invoking it will mistakenly run one that just installed. On that case, must link it back   
+    Since `make` install location set by `--prefix=/usr` shown in CL above will put python3.6.15 binary in `/usr/bin`, the installation may possibly replace system-wide `python` link with another pointing to it. Since most system tools using this main/system-wide python latest version, invoking it will mistakenly run this one just installed. On that case, must link it back   
     ```
     sudo ln -sf /usr/bin/{python3.14, python}`
     sudo ln -sf /usr/bin/python{3.14,}-config
