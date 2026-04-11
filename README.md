@@ -59,7 +59,7 @@ It requires, as a dependency, certain openSSL version
 8. Build it using CL that would compile it against the newly created openSSL static library and has option to skip useless PGO-build module testsinstall
    it will install it in `/usr/bin`   
    ```   
-   ./configure --without-ensurepip --prefix=/usr CFLAGS='-march=native -O3' CPPFLAGS=-I../openssl-1.1.0l.bin/include LDFLAGS='-L../openssl-1.1.0l.bin/lib' LIBS='-lssl -lcrypto -ldl -lpthread -lz' && make PROFILE_TASK='-m test.regrtest --pgo -x test_asyncio test_buffer test_concurrent_futures test_compileall test_decimal test_http* test_io test_lib2to3 test_log* test_pickle test_readline test_signal test_socket test_tarfile test_trace test_url* test_venv test_weakref' profile-opt -j && strip python && sudo make install   
+   ./configure --without-ensurepip --prefix=/usr CFLAGS='-march=native -O3' CPPFLAGS=-I../openssl-1.1.0l.bin/include LDFLAGS='-L../openssl-1.1.0l.bin/lib' LIBS='-lssl -lcrypto -ldl -lpthread -lz' && make PROFILE_TASK='-m test.regrtest --pgo -x test_asyncio test_buffer test_concurrent_futures test_compileall test_decimal test_httplib test_io test_lib2to3 test_pickle test_readline test_signal test_socket test_tarfile test_trace test_venv test_weakref' profile-opt -j && strip python && sudo make install   
    ```   
 9. Verify the one there  
    ```
