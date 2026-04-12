@@ -3,26 +3,25 @@ TensorFlow uses on AVX instruction-void CPU may be as good as that on more moder
 
 While a TensorFlow version newer than 1.5 requires very pricey CPU capable of performing AVX instruction, the TensorFlow version 1.5 can still work on a CPU incapable of performing AVX instruction   
 
-Now the point is; this TensorFlow can only be utilized by using Python version 3.6 or older only, which is now difficult to build due to incompatibilility or interfacing incorrectness between it and current OS mainstream packages, leading to build failures.   
-This because of its due EOL (end-of-life) as stated on its official page:   
+Now the point is; this TensorFlow can only be utilized by using Python version 3.6 or older only, which is now difficult to build due to incompatibilility or interfacing incorrectness between it and current OS mainstream packages, leading to build failures. This because of its EOL (end-of-life) as stated in its official page:   
 ##### Warning: Python 3.6.0 reached end-of-life on 2021-12-23. It is no longer supported and does not receive security updates. We recommend upgrading to the latest Python release   
 
 So here and now, this is to fix and revive the Python 3.6 project to have this Python correctly built and be made use for old TensorFlow version 1.5   
 It requires, as a dependency, certain openSSL version   
 
 1. Get openSSl 1.1.0   
-   https://github.com/openssl/openssl/releases/download/OpenSSL_1_1_0l/openssl-1.1.0l.tar.gz  
+   https://github.com/openssl/openssl/releases/download/OpenSSL_1_1_1w/openssl-1.1.1w.tar.gz  
 2. Prepare a location, write down or remember well its path, later this'd be the same path where the Python tar must be extracted to   
    Extract openssl tar in this path as a directory, make sure its owner is the user with 755 permission entirely   
 3. So the path would gather directory:   
-   - `openssl-1.1.0l` source   
-   - `openssl-1.1.0l.bin`    (a renamed/suffixed of previous one automatically created, shown below)   
+   - `openssl-1.1.1w` source   
+   - `openssl-1.1.1w.bin`    (a renamed/suffixed of previous one automatically created, shown below)   
    - `Python-3.6.15` source   
 4. Enter into openssl-1.1.0l source directory and build   
    ```
-   cd openssl-1.1.0l && ./config -march=native --prefix=$PWD.bin && make -j && make install   
+   cd openssl-1.1.1w && ./config -march=native --prefix=$PWD.bin && make -j && make install   
    ```
-   Notice `$PWD.bin`. This suffixes it as `openssl-1.1.0l.bin` which is then automatically created during `make install` execution   
+   Notice `$PWD.bin`. This suffixes it as `openssl-1.1.0l.bin` which will be automatically created during `make install` execution   
 
 5. Now download Python 3.6.15 project source from its download page   
    https://www.python.org/ftp/python/3.6.15   
@@ -59,14 +58,14 @@ It requires, as a dependency, certain openSSL version
 8. Build it using this command line that would compile it against the newly created openSSL static library, and should skip useless PGO-build module tests   
    it will install in `/usr/bin`   
    ```   
-   ./configure --without-ensurepip --prefix=/usr CFLAGS='-march=native -O3' CPPFLAGS=-I../openssl-1.1.0l.bin/include LDFLAGS='-L../openssl-1.1.0l.bin/lib' LIBS='-lssl -lcrypto -ldl -lpthread -lz' && make PROFILE_TASK='-m test.regrtest --pgo -x test_asyncio test_buffer test_concurrent_futures test_compileall test_decimal test_httplib test_io test_lib2to3 test_pickle test_readline test_signal test_socket test_tarfile test_trace test_venv test_weakref' profile-opt -j && strip python && sudo make install   
+   ./configure --without-ensurepip --prefix=/usr CFLAGS='-march=native -O3' CPPFLAGS=-I../openssl-1.1.1w.bin/include LDFLAGS='-L../openssl-1.1.1w.bin/lib' LIBS='-lssl -lcrypto -ldl -lpthread -lz' && make PROFILE_TASK='-m test.regrtest --pgo -x test_asyncio test_buffer test_concurrent_futures test_compileall test_decimal test_httplib test_io test_lib2to3 test_pickle test_readline test_signal test_socket test_tarfile test_trace test_venv test_weakref' profile-opt -j && strip python && sudo make install   
    ```   
 9. Verify the one there  
    ```
    ./python --version`  && ./python -c 'import ssl; print(ssl.OPENSSL_VERSION)'
    ```
    `Python 3.6.15`   
-   `OpenSSL 1.1.0l  10 Sep 2019`   
+   `OpenSSL 1.1.1w  11 Sep 2023`   
 
 10. **Please note. IMPORTANT!**   
     Simply inspect the python related files   
@@ -95,7 +94,7 @@ It requires, as a dependency, certain openSSL version
     ```
     . ~/TensorFlow1.5/activate`   
     curl -O https://bootstrap.pypa.io/pip/3.6/get-pip.py && python get-pip.py   
-    pip --version && rm get-pip.py
+    pip --version && rm -v get-pip.py
     ```
     Upon success if user is *foo* it'll print:   
     `pip 21.3.1 from /home/foo/TensorFlow1.5/lib/python3.6/site-packages/pip (python 3.6)`   
