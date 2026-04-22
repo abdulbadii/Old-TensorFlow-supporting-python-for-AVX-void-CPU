@@ -9,7 +9,7 @@ Now the point is; this TensorFlow can only be utilized by using Python version 3
 So here and now, this is to fix and revive the Python 3.6 project to have this Python correctly built and be made use for old TensorFlow version 1.5   
 It requires, as a dependency, certain openSSL version   
 
-1. Get openSSl 1.1.0   
+1. Get openSSl 1.1.1   
    https://github.com/openssl/openssl/releases/download/OpenSSL_1_1_1w/openssl-1.1.1w.tar.gz  
 2. Prepare a location, write down or remember well its path, later this'd be the same path where the Python tar must be extracted to   
    Extract openssl tar in this path as a directory, make sure its owner is the user with 755 permission entirely   
@@ -17,11 +17,11 @@ It requires, as a dependency, certain openSSL version
    - `openssl-1.1.1w` source   
    - `openssl-1.1.1w.bin`    (a renamed/suffixed of previous one automatically created, shown below)   
    - `Python-3.6.15` source   
-4. Enter into openssl-1.1.0l source directory and build   
+4. Enter into openssl-1.1.1w source directory and build   
    ```
    cd openssl-1.1.1w && ./config -march=native --prefix=$PWD.bin && make -j && make install   
    ```
-   Notice `$PWD.bin`. This suffixes it as `openssl-1.1.0l.bin` which will be automatically created during `make install` execution   
+   Notice `$PWD.bin`. This suffixes it as `openssl-1.1.1w.bin` which will be automatically created during `make install` execution   
 
 5. Now download Python 3.6.15 project source from its download page   
    https://www.python.org/ftp/python/3.6.15   
